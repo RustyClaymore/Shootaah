@@ -4,13 +4,13 @@ public class InputManager : MonoBehaviour
 {
     private Vector3 movementInput;
     private Vector3 mousePos;
-    private bool mouseButton1Clicked;
+    private bool button1Pressed;
 
     public static InputManager Instance { get; private set; }
 
     public Vector3 MovementInput { get => movementInput; }
     public Vector3 MousePos { get => mousePos; }
-    public bool MouseButton1Clicked { get => mouseButton1Clicked; }
+    public bool Button1Pressed { get => button1Pressed; }
 
     private void Awake()
     {
@@ -32,6 +32,6 @@ public class InputManager : MonoBehaviour
 
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        mouseButton1Clicked = Input.GetMouseButtonDown(0);
+        button1Pressed = Input.GetMouseButton(0);
     }
 }

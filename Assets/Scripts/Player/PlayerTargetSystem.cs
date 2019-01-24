@@ -6,7 +6,9 @@ public class PlayerTargetSystem : MonoBehaviour
 {
     public bool IsAiming { get; private set; }
     public GameObject TargetEnemy { get; private set; }
+    public PlayerDataSO PlayerData { get => playerData; set => playerData = value; }
 
+    private PlayerDataSO playerData;
     private GameObject[] enemies;
 
     private struct EnemyDist
@@ -45,7 +47,7 @@ public class PlayerTargetSystem : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distance <= 10)
+            if (distance <= playerData.aimDistance)
             {
                 EnemyDist enemyDist = new EnemyDist();
                 enemyDist.enemy = enemy;

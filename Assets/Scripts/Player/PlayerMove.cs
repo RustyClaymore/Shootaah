@@ -2,11 +2,11 @@
 
 public class PlayerMove : MonoBehaviour
 {
-    //private PlayerData playerStats;
+    private PlayerDataSO playerData;
     private new Rigidbody rigidbody;
     private PlayerTargetSystem targetSystem;
 
-    // public PlayerData PlayerStats { get => playerStats; set => playerStats = value; }
+    public PlayerDataSO PlayerData { get => playerData; set => playerData = value; }
 
     void Start()
     {
@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour
         if (!IsMoving())
             return;
 
-        rigidbody.MovePosition(transform.position + InputManager.Instance.MovementInput * Time.fixedDeltaTime * 5);
+        rigidbody.MovePosition(transform.position + InputManager.Instance.MovementInput.normalized * Time.fixedDeltaTime * playerData.speed);
     }
 
     private void LookForward()
