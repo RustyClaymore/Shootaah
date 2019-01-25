@@ -7,7 +7,7 @@ public class EnemyLifeController : MonoBehaviour, IDamageable
     private int enemyLife;
     private EnemyDataSO enemyData;
 
-    void Start()
+    public void Init()
     {
         enemyLife = enemyData.maxHealth;
     }

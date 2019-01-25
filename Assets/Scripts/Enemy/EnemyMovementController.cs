@@ -13,7 +13,7 @@ public class EnemyMovementController : MonoBehaviour
     private bool isMovingToNextRoamTarget;
     private Vector3 nextRoamTarget;
 
-    private void Awake()
+    public void Init()
     {
         rigidbody = GetComponent<Rigidbody>();
 

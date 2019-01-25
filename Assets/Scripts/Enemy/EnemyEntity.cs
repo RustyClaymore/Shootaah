@@ -29,9 +29,11 @@ public class EnemyEntity : BaseGameEntity
         
         enemyLifeController = enemyGO.AddComponent<EnemyLifeController>();
         enemyLifeController.EnemyData = enemyData;
+        enemyLifeController.Init();
 
         enemyMovementController = enemyGO.AddComponent<EnemyMovementController>();
         enemyMovementController.EnemyData = enemyData;
+        enemyMovementController.Init();
 
         enemyTargetController = enemyGO.AddComponent<EnemyTargetController>();
         enemyTargetController.EnemyData = enemyData;

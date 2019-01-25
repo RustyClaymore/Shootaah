@@ -28,7 +28,7 @@ public class PlayerLife : MonoBehaviour, IDamageable
 
         if (IsDead())
         {
-            Debug.Log("Player dead!");
+            SessionManager.Instance.FailMission();
         }
     }
 
