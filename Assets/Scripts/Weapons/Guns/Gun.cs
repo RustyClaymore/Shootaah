@@ -3,18 +3,17 @@
 public abstract class Gun : MonoBehaviour, IGun
 {
     public bool IsShooting { get => isShooting; set => isShooting = value; }
+    public GunDataSO gunData;
+    public Transform barrel;
 
-    [SerializeField]
-    protected GunDataSO gunData;
-    [SerializeField]
-    protected Transform barrel;
     protected bool isShooting;
 
     private float currentShootCooldown;
-    
+
     public virtual void Start()
     {
         isShooting = false;
+        currentShootCooldown = 0;
     }
 
     public virtual void Update()
@@ -26,7 +25,7 @@ public abstract class Gun : MonoBehaviour, IGun
 
     public bool IsReadyToShoot()
     {
-        return currentShootCooldown < 0f;
+        return currentShootCooldown <= 0f;
     }
 
     protected void ResetCooldown()

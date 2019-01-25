@@ -5,7 +5,7 @@ public class PlayerShoot : MonoBehaviour
     private GameObject currentGun;
 
     public GameObject CurrentGun { get => currentGun; set => currentGun = value; }
-    
+
     void Update()
     {
         IGun playerGun = currentGun.GetComponent<IGun>();

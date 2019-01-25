@@ -8,6 +8,8 @@ public class Loader : MonoBehaviour
     private GameObject inputManager;
     [SerializeField]
     private GameObject sessionManager;
+    [SerializeField]
+    private GameObject wavesManager;
 
     void Awake()
     {
@@ -19,6 +21,11 @@ public class Loader : MonoBehaviour
         if (SessionManager.Instance == null)
         {
             Instantiate(sessionManager);
+        }
+
+        if (EnemyWavesManager.Instance == null)
+        {
+            Instantiate(wavesManager);
         }
     }
 }

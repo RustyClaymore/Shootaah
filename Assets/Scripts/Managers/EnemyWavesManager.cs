@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyWavesManager : MonoBehaviour
 {
     public static EnemyWavesManager Instance { get; private set; }
-    public List<GameObject> CurrentWaveEnemyGOs { get => currentWaveEnemyGOs; set => currentWaveEnemyGOs = value; }
 
     [SerializeField]
     private GameObject enemyPrefab;
@@ -14,7 +12,7 @@ public class EnemyWavesManager : MonoBehaviour
     [SerializeField]
     private EnemyDataSO enemyData;
     [SerializeField]
-    private GameObject currentGun;
+    private GameObject defaultGun;
 
 
     private EnemyEntity[] currentWaveEntities;
@@ -23,7 +21,7 @@ public class EnemyWavesManager : MonoBehaviour
     private int waveCounter;
     private int maxWaves;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -57,6 +55,15 @@ public class EnemyWavesManager : MonoBehaviour
         }
     }
 
+    public GameObject[] GetCurrentEnemiesGOsArray()
+    {
+        if (currentWaveEnemyGOs.Count == 0) {
+            return System.Array.Empty<GameObject>();
+        }
+
+        return currentWaveEnemyGOs.ToArray();
+    }
+
     private void SpawnWave(int waveId)
     {
         currentWaveEnemyGOs = new List<GameObject>();
@@ -65,17 +72,19 @@ public class EnemyWavesManager : MonoBehaviour
         currentWaveEntities = new EnemyEntity[enemiesCount];
         for (int i = 0; i < enemiesCount; i++)
         {
-            SpawnEnemy();
+            GameObject enemyGO = SpawnEnemy();
+            GameObject currentGun = Instantiate(defaultGun, enemyGO.transform, false);
+            currentWaveEnemyGOs.Add(enemyGO);
             currentWaveEntities[i] = new EnemyEntity(0, currentWaveEnemyGOs[i], enemyData, currentGun);
         }
     }
 
-    private void SpawnEnemy()
+    private GameObject SpawnEnemy()
     {
         Vector3 spawnLocation = Random.insideUnitSphere * 5;
         spawnLocation.y = 0;
 
-        GameObject enemyGO = (GameObject)Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
-        currentWaveEnemyGOs.Add(enemyGO);
+        return (GameObject)Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
+        
     }
 }

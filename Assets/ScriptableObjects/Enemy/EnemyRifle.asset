@@ -15,7 +15,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 9213218790781286208, guid: 4e6efe90130254449acc89ce967a93f8,
     type: 3}
   speed: 12
-  fireRate: 1
+  fireRate: 4
   jamThreshold: 0
   jamRate: 0
   jamFixRate: 0

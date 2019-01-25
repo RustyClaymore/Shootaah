@@ -22,6 +22,6 @@ public class SessionManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        currentPlayer = Instantiate(playerPrefab) as GameObject;
+        currentPlayer = Instantiate(playerPrefab, new Vector3(0, 0, -5), Quaternion.identity) as GameObject;
     }
 }

@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager Instance { get; private set; }
+
+    public PlayerMove PlayerMove { get => playerMove; }
+    public PlayerShoot PlayerShot { get => playerShoot; }
+    public PlayerLife PlayerLife { get => playerLife; }
+    public PlayerTargetSystem TargetSystem { get => targetSystem; }
+
     [SerializeField]
     private PlayerDataSO playerData;
     [SerializeField]
@@ -13,13 +20,6 @@ public class PlayerManager : MonoBehaviour
     private PlayerShoot playerShoot;
     private PlayerLife playerLife;
     private PlayerTargetSystem targetSystem;
-
-    public static PlayerManager Instance { get; private set; }
-
-    public PlayerMove PlayerMove { get => playerMove; set => playerMove = value; }
-    public PlayerShoot PlayerShot { get => playerShoot; set => playerShoot = value; }
-    public PlayerLife PlayerLife { get => playerLife; set => playerLife = value; }
-    public PlayerTargetSystem TargetSystem { get => targetSystem; set => targetSystem = value; }
 
     void Awake()
     {
@@ -39,7 +39,8 @@ public class PlayerManager : MonoBehaviour
         playerMove.PlayerData = playerData;
 
         playerShoot = gameObject.AddComponent<PlayerShoot>() as PlayerShoot;
-        playerShoot.CurrentGun = defaultGun;
+        GameObject currentGun = Instantiate(defaultGun, this.transform, false);
+        playerShoot.CurrentGun = currentGun;
 
         playerLife = gameObject.AddComponent<PlayerLife>() as PlayerLife;
         playerLife.PlayerData = playerData;

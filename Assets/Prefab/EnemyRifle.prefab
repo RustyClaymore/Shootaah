@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8289005644782244283}
   - component: {fileID: 5279310712809541314}
   - component: {fileID: 9214422316497181640}
-  - component: {fileID: 1845634984}
+  - component: {fileID: 6341547222882421044}
   m_Layer: 0
   m_Name: EnemyRifle
   m_TagString: Untagged
@@ -79,7 +79,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1845634984
+--- !u!114 &6341547222882421044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
