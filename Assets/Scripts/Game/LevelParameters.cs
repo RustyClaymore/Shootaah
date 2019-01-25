@@ -4,4 +4,5 @@
 public class LevelParameters : ScriptableObject
 {
     public int[] enemiesPerWave;
+    public Transform[] spawnLocations;
 }

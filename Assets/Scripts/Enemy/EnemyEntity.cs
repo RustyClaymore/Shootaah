@@ -5,10 +5,13 @@ public class EnemyEntity : BaseGameEntity
     public EnemyMovementController EnemyMovementController { get => enemyMovementController; }
     public EnemyTargetController EnemyTargetController { get => enemyTargetController; }
     public EnemyShootController EnemyShootController { get => enemyShootController; }
+    public EnemyLifeController EnemyLifeController { get => enemyLifeController; }
+    public GameObject EnemyGO { get => enemyGO; }
 
     private GameObject enemyGO;
     private EnemyDataSO enemyData;
 
+    private EnemyLifeController enemyLifeController;
     private EnemyMovementController enemyMovementController;
     private EnemyTargetController enemyTargetController;
     private EnemyShootController enemyShootController;
@@ -23,6 +26,9 @@ public class EnemyEntity : BaseGameEntity
 
         this.enemyGO = enemyGO;
         this.enemyData = enemyData;
+        
+        enemyLifeController = enemyGO.AddComponent<EnemyLifeController>();
+        enemyLifeController.EnemyData = enemyData;
 
         enemyMovementController = enemyGO.AddComponent<EnemyMovementController>();
         enemyMovementController.EnemyData = enemyData;

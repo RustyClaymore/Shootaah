@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyWavesManager : MonoBehaviour
@@ -15,8 +16,10 @@ public class EnemyWavesManager : MonoBehaviour
     private GameObject defaultGun;
 
 
-    private EnemyEntity[] currentWaveEntities;
+    private List<EnemyEntity> currentWaveEntities;
     private List<GameObject> currentWaveEnemyGOs;
+
+    private List<EnemyEntity> toBeKilledEntities;
 
     private int waveCounter;
     private int maxWaves;
@@ -38,13 +41,15 @@ public class EnemyWavesManager : MonoBehaviour
         waveCounter = 0;
         maxWaves = levelParameters.enemiesPerWave.Length;
 
+        toBeKilledEntities = new List<EnemyEntity>();
+
         int firstWaveCount = levelParameters.enemiesPerWave[waveCounter];
         SpawnWave(waveCounter);
     }
 
     void Update()
     {
-        if (currentWaveEntities.Length == 0 && waveCounter < maxWaves)
+        if (currentWaveEntities.Count == 0 && waveCounter < maxWaves)
         {
 
         }
@@ -53,6 +58,8 @@ public class EnemyWavesManager : MonoBehaviour
         {
             enemy.Update();
         }
+
+        KillDeadEnemies();
     }
 
     public GameObject[] GetCurrentEnemiesGOsArray()
@@ -64,27 +71,45 @@ public class EnemyWavesManager : MonoBehaviour
         return currentWaveEnemyGOs.ToArray();
     }
 
+    public void Kill(EnemyEntity enemy)
+    {
+        toBeKilledEntities.Add(enemy);
+    }
+
     private void SpawnWave(int waveId)
     {
         currentWaveEnemyGOs = new List<GameObject>();
 
         int enemiesCount = levelParameters.enemiesPerWave[waveId];
-        currentWaveEntities = new EnemyEntity[enemiesCount];
+        //currentWaveEntities = new EnemyEntity[enemiesCount];
+        currentWaveEntities = new List<EnemyEntity>();
         for (int i = 0; i < enemiesCount; i++)
         {
             GameObject enemyGO = SpawnEnemy();
             GameObject currentGun = Instantiate(defaultGun, enemyGO.transform, false);
             currentWaveEnemyGOs.Add(enemyGO);
-            currentWaveEntities[i] = new EnemyEntity(0, currentWaveEnemyGOs[i], enemyData, currentGun);
+            currentWaveEntities.Add(new EnemyEntity(0, currentWaveEnemyGOs[i], enemyData, currentGun));
         }
     }
 
     private GameObject SpawnEnemy()
     {
-        Vector3 spawnLocation = Random.insideUnitSphere * 5;
+        Vector3 spawnLocation = UnityEngine.Random.insideUnitSphere * 5;
         spawnLocation.y = 0;
 
         return (GameObject)Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
         
+    }
+
+    private void KillDeadEnemies()
+    {
+        foreach (EnemyEntity enemy in toBeKilledEntities)
+        {
+            currentWaveEnemyGOs.Remove(enemy.EnemyGO);
+            currentWaveEntities.Remove(enemy);
+            Destroy(enemy.EnemyGO);
+        }
+
+        toBeKilledEntities = new List<EnemyEntity>();
     }
 }

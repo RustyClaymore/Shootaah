@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b4535840fe52d4b9c9590a45621bf7, type: 3}
   m_Name: EnemyRifle
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 9213218790781286208, guid: 4e6efe90130254449acc89ce967a93f8,
+  projectilePrefab: {fileID: 9213218790781286208, guid: e0d0d4710876f864589c5c517becece6,
     type: 3}
   speed: 12
   fireRate: 4

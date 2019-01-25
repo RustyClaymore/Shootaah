@@ -47,3 +47,5 @@ MonoBehaviour:
     type: 3}
   sessionManager: {fileID: 6371530516422949714, guid: c866049002d0b424e95cd8ed60ca68da,
     type: 3}
+  wavesManager: {fileID: 3800128880388606554, guid: 4e5dab38d2a903c49b6fc812646553c4,
+    type: 3}

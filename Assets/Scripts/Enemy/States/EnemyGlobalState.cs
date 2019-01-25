@@ -20,6 +20,10 @@ public class EnemyGlobalState : State<EnemyEntity>
 
     public override void Execute(EnemyEntity enemy)
     {
+        if(enemy.EnemyLifeController.IsDead())
+        {
+            EnemyWavesManager.Instance.Kill(enemy);
+        }
         /*
         if (enemy.IsFleeing && !enemy.IsAttacking && (enemy.GetFSM().GetCurrentState() != KnightEscapeEnemiesState.Instance))
         {

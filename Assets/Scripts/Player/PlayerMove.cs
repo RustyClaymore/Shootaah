@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-        if (targetSystem.IsAiming)
+        if (targetSystem.IsAiming && targetSystem.TargetEnemy != null)
         {
             LookAtTarget();
         }
