@@ -16,16 +16,12 @@ public class PlayerTargetSystem : MonoBehaviour
         public GameObject enemy;
         public float distanceFromPlayer;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-    }
-
+    
     // Update is called once per frame
     void Update()
     {
+        enemies = EnemyWavesManager.Instance.CurrentWaveEnemyGOs.ToArray();
+     
         GameObject closestEnemy = GetClosestEnemy(enemies);
         
         if (closestEnemy != null)

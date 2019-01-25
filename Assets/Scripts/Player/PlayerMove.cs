@@ -35,7 +35,10 @@ public class PlayerMove : MonoBehaviour
     private void Move()
     {
         if (!IsMoving())
+        {
+            rigidbody.velocity = Vector3.zero;
             return;
+        }
 
         rigidbody.MovePosition(transform.position + InputManager.Instance.MovementInput.normalized * Time.fixedDeltaTime * playerData.speed);
     }

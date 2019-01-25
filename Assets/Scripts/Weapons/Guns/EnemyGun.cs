@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class AutomaticGun : Gun
+public class EnemyGun : Gun
 {
     public override int Shot()
     {
-        if (!IsReadyToShoot() || IsJammed() || isFixingJam)
+        if (!IsReadyToShoot())
         {
             return 0;
         }
@@ -12,9 +12,6 @@ public class AutomaticGun : Gun
         IsShooting = true;
 
         ResetCooldown();
-        IncreaseJamRate();
-
-        jamTime = Time.time;
 
         GameObject proj = Instantiate(gunData.projectilePrefab, barrel.position, Quaternion.identity) as GameObject;
         proj.GetComponent<Rigidbody>().AddForce(barrel.forward * gunData.speed, ForceMode.Impulse);

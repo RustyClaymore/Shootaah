@@ -33,6 +33,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         targetSystem = gameObject.AddComponent<PlayerTargetSystem>() as PlayerTargetSystem;
+        targetSystem.PlayerData = playerData;
 
         playerMove = gameObject.AddComponent<PlayerMove>() as PlayerMove;
         playerMove.PlayerData = playerData;

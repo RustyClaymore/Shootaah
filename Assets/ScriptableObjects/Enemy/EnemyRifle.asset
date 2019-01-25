@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4b4535840fe52d4b9c9590a45621bf7, type: 3}
-  m_Name: PistolData
+  m_Name: EnemyRifle
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 9213218790781286208, guid: 4e6efe90130254449acc89ce967a93f8,
     type: 3}
-  speed: 10
-  fireRate: 2
-  jamThreshold: 100
-  jamRate: 10
-  jamFixRate: 30
-  timeBeforeFixStart: 1
-  timeBetweenFixes: 0.2
+  speed: 12
+  fireRate: 1
+  jamThreshold: 0
+  jamRate: 0
+  jamFixRate: 0
+  timeBeforeFixStart: 0
+  timeBetweenFixes: 0
