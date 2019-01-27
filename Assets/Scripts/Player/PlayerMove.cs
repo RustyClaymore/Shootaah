@@ -2,16 +2,21 @@
 
 public class PlayerMove : MonoBehaviour
 {
-    private PlayerDataSO playerData;
+
+    public Transform[] Reactors { get => reactors; set => reactors = value; }
+
     private new Rigidbody rigidbody;
     private PlayerTargetSystem targetSystem;
 
-    public PlayerDataSO PlayerData { get => playerData; set => playerData = value; }
+    private float speed;
+
+    private Transform[] reactors;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         targetSystem = GetComponent<PlayerTargetSystem>();
+        speed = PlayerManager.Instance.PlayerData.speed[PlayerManager.Instance.CurrentUpgradeLevels.speed];
     }
 
     void FixedUpdate()
@@ -39,8 +44,8 @@ public class PlayerMove : MonoBehaviour
             rigidbody.velocity = Vector3.zero;
             return;
         }
-
-        rigidbody.MovePosition(transform.position + InputManager.Instance.MovementInput.normalized * Time.fixedDeltaTime * playerData.speed);
+        
+        rigidbody.MovePosition(transform.position + InputManager.Instance.MovementInput.normalized * Time.fixedDeltaTime * speed);
     }
 
     private void LookForward()
@@ -49,14 +54,26 @@ public class PlayerMove : MonoBehaviour
             return;
 
         Quaternion rotation = Quaternion.LookRotation(InputManager.Instance.MovementInput, Vector3.up);
-        transform.rotation = rotation;
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 0.3f);
 
+        RotateReactors(rotation);
     }
 
     private void LookAtTarget()
     {
         Vector3 targetDirection = targetSystem.TargetEnemy.transform.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-        transform.rotation = rotation;
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 0.7f);
+
+        Quaternion newReactorRotation = Quaternion.LookRotation(InputManager.Instance.MovementInput, Vector3.up);
+        RotateReactors(newReactorRotation);
+    }
+
+    private void RotateReactors(Quaternion rotation)
+    {
+        foreach (Transform reactor in reactors)
+        {
+            reactor.rotation = Quaternion.Lerp(reactor.rotation, rotation, 0.05f);
+        }
     }
 }

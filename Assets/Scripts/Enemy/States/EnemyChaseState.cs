@@ -28,8 +28,6 @@ public class EnemyChaseState : State<EnemyEntity>
         Debug.Log("Enemy " + enemy.GetID() + " : Chasing player !");
 
         // What should happen when he's roaming
-        enemy.EnemyMovementController.LookAtPlayerTarget();
-        enemy.EnemyMovementController.MoveTowardsTarget();
 
         // Check for condition to switch state
         if (enemy.EnemyTargetController.IsPlayerInAttackRange())
@@ -41,6 +39,12 @@ public class EnemyChaseState : State<EnemyEntity>
         {
             enemy.GetFSM().ChangeState(EnemyRoamState.Instance);
         }
+    }
+
+    public override void FixedExecute(EnemyEntity enemy)
+    {
+        enemy.EnemyMovementController.LookAtPlayerTarget();
+        enemy.EnemyMovementController.MoveTowardsTarget();
     }
 
     public override void Exit(EnemyEntity enemy)

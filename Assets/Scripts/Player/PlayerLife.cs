@@ -2,28 +2,38 @@
 
 public class PlayerLife : MonoBehaviour, IDamageable
 {
-    private PlayerDataSO playerData;
-    private int playerHealth;
+    private int playerMaxHealth;
+    private int healthRegen;
     private float regenCooldown;
-
-    public PlayerDataSO PlayerData { get => playerData; set => playerData = value; }
+    
+    [SerializeField]
+    private int currentHealth;
+    private float currentRegenCooldown;
 
     void Start()
     {
-        playerHealth = playerData.maxHealth;
-        regenCooldown = playerData.regenCooldown;
+        PlayerDataSO playerData = PlayerManager.Instance.PlayerData;
+        UpgradeLevels currentUpgradeLevels = PlayerManager.Instance.CurrentUpgradeLevels;
+
+        playerMaxHealth = playerData.maxHealth[currentUpgradeLevels.maxHealth];
+        currentHealth = playerMaxHealth;
+
+        regenCooldown = playerData.regenCooldown[currentUpgradeLevels.regenCooldown];
+        currentRegenCooldown = regenCooldown;
+
+        healthRegen = playerData.healthRegen[currentUpgradeLevels.healthRegen];
     }
 
     void Update()
     {
         if (!PlayerManager.Instance.PlayerMove.IsMoving())
         {
-            regenCooldown -= Time.deltaTime;
-            PeriodicHeal(playerData.healthRegen);
+            currentRegenCooldown -= Time.deltaTime;
+            PeriodicHeal(healthRegen);
         }
         else
         {
-            regenCooldown = playerData.regenCooldown;
+            currentRegenCooldown = regenCooldown;
         }
 
         if (IsDead())
@@ -34,25 +44,25 @@ public class PlayerLife : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        playerHealth -= damage;
+        currentHealth -= damage;
     }
 
     public void Heal(int healAmount)
     {
-        playerHealth = Mathf.Min(playerHealth + healAmount, playerData.maxHealth);
+        currentHealth = Mathf.Min(currentHealth + healAmount, playerMaxHealth);
     }
 
     public bool IsDead()
     {
-        return playerHealth <= 0;
+        return currentHealth <= 0;
     }
     
     private void PeriodicHeal(int healAmount)
     {
-        if (playerHealth < playerData.maxHealth && regenCooldown <= 0)
+        if (currentHealth < playerMaxHealth && currentRegenCooldown <= 0)
         {
             Heal(healAmount);
-            regenCooldown = playerData.regenCooldown;
+            currentRegenCooldown = regenCooldown;
         }
     }
 }

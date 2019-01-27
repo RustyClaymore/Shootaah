@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 9213218790781286208, guid: 4e6efe90130254449acc89ce967a93f8,
     type: 3}
-  speed: 15
-  fireRate: 5
+  speed: 100
+  fireRate: 10
   jamThreshold: 100
-  jamRate: 5
+  jamRate: 1
   jamFixRate: 10
   timeBeforeFixStart: 1
   timeBetweenFixes: 0.2

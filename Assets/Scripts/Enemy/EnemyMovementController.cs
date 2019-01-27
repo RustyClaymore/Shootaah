@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemyMovementController : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class EnemyMovementController : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(targetDirection, Vector3.up);
         transform.rotation = rotation;
     }
-    
+
     public void LookAtNextRoamTarget()
     {
         Vector3 targetDirection = nextRoamTarget - transform.position;

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -80,7 +80,7 @@ public class EnemyWavesManager : MonoBehaviour
 
         KillDeadEnemies();
     }
-
+    
     public GameObject[] GetCurrentEnemiesGOsArray()
     {
         if (currentWaveEnemyGOs.Count == 0)
