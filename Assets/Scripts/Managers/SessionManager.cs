@@ -8,8 +8,8 @@ public class SessionManager : MonoBehaviour
     public bool IsGamePaused { get => isGamePaused; }
     public bool MissionCompleted { get => missionCompleted; }
     public bool MissionFailed { get => missionFailed; }
-    public int CollectedCoinAmount { get => collectedCoinAmount; }
-
+    public int CollectedDiamondAmount { get => collectedDiamondAmount; }
+    
     [SerializeField]
     private GameObject playerPrefab;
     private GameObject currentPlayer;
@@ -19,7 +19,10 @@ public class SessionManager : MonoBehaviour
     private bool missionCompleted;
     private bool missionFailed;
 
-    private int collectedCoinAmount;
+    private int collectedDiamondAmount;
+    private bool diamondsSaved = false;
+
+    private float countDownBeforeEndScreen;
 
     void Awake()
     {
@@ -38,35 +41,50 @@ public class SessionManager : MonoBehaviour
         missionCompleted = false;
         missionFailed = false;
 
-        collectedCoinAmount = 0;
+        collectedDiamondAmount = 0;
+        diamondsSaved = false;
+
+        countDownBeforeEndScreen = 5;
     }
 
     void Update()
     {
         if (missionCompleted)
         {
-            Debug.Log("Mission Accomplished");
+            countDownBeforeEndScreen -= Time.deltaTime;
+            if (countDownBeforeEndScreen <= 0)
+            {
+                isGamePaused = true;
+                isGameStarted = false;
+
+                UILevelManager.Instance.ActivateWinScreenUI();
+                SaveCollectedDiamondAmount();
+            }
         }
 
         if (missionFailed)
         {
-            Debug.Log("Mission Failed");
+            isGamePaused = true;
+            isGameStarted = false;
+
+            collectedDiamondAmount = 0;
+            UILevelManager.Instance.ActivateLoseScreenUI();
         }
     }
 
-    public void IncreaseCoinAmount(int amount)
+    public void IncreaseDiamondAmount(int amount)
     {
-        collectedCoinAmount += amount;
-    }
-    
-    public void SaveCollectedCoinAmount()
-    {
-        PlayerPrefs.SetInt(Coin.CoinType, GetPlayerCoinAmount() + collectedCoinAmount);
+        collectedDiamondAmount += amount;
     }
 
-    public int GetPlayerCoinAmount()
+    public void SaveCollectedDiamondAmount()
     {
-        return PlayerPrefs.GetInt(Coin.CoinType, 0);
+        if (diamondsSaved)
+        {
+            return;
+        }
+        PlayerPrefs.SetInt(Diamond.DiamondType, Diamond.GetCurrentDiamondAmount() + collectedDiamondAmount);
+        diamondsSaved = true;
     }
 
     public void CompleteMission()

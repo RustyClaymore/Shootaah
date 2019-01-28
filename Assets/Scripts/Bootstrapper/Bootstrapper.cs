@@ -5,6 +5,8 @@ public class Bootstrapper : MonoBehaviour
     [SerializeField]
     private GameObject uiLevelManager;
     [SerializeField]
+    private GameObject mobileInputPrefab;
+    [SerializeField]
     private GameObject inputManager;
     [SerializeField]
     private GameObject sessionManager;
@@ -12,6 +14,8 @@ public class Bootstrapper : MonoBehaviour
     private GameObject wavesManager;
     [SerializeField]
     private GameObject collectibleSpawnManager;
+    [SerializeField]
+    private GameObject particlesManager;
 
     void Awake()
     {
@@ -24,6 +28,10 @@ public class Bootstrapper : MonoBehaviour
         {
             Instantiate(uiLevelManager);
         }
+
+#if UNITY_ANDROID
+        Instantiate(mobileInputPrefab);
+#endif
 
         if (InputManager.Instance == null)
         {
@@ -38,6 +46,11 @@ public class Bootstrapper : MonoBehaviour
         if (CollectibleSpawnManager.Instance == null)
         {
             Instantiate(collectibleSpawnManager);
+        }
+
+        if (ParticlesManager.Instance == null)
+        {
+            Instantiate(particlesManager);
         }
     }
 }

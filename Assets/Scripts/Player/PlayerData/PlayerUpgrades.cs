@@ -46,8 +46,9 @@ public static class PlayerUpgrades
         return PlayerPrefs.GetInt(upgrade, 0);
     }
 
-    public static void Upgrade(string upgrade)
+    public static void Upgrade(string upgrade, Upgrade upgradeData)
     {
+        Diamond.PayDiamondCost((int)upgradeData.levelUpgradeCosts[GetUpgradeLevel(upgrade)]);
         PlayerPrefs.SetInt(upgrade, GetUpgradeLevel(upgrade) + 1);
     }
 

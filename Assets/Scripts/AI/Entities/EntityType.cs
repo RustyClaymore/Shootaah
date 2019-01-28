@@ -1,6 +1,7 @@
 ﻿public enum EntityType
 {
-    defaultEntityType = -1,
-    playerEntityType = 0,
-    enemyEntityType = 1,
+    defaultType = -1,
+    playerType = 0,
+    enemyFighterType = 1,
+    enemyKamikazeType = 2,
 }

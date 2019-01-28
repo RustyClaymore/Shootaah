@@ -7,17 +7,16 @@ public class EnemyWavesManager : MonoBehaviour
     public static EnemyWavesManager Instance { get; private set; }
 
     [SerializeField]
-    private GameObject coinPrefab;
-    [SerializeField]
-    private GameObject enemyPrefab;
-    [SerializeField]
     private LevelParametersSO levelParameters;
     [SerializeField]
-    private EnemyDataSO enemyData;
+    private Transform[] spawnLocations;
+    [SerializeField]
+    private GameObject[] enemyPrefabs;
+    [SerializeField]
+    private EnemyDataSO[] enemyData;
     [SerializeField]
     private GameObject defaultGun;
-
-
+    
     private List<EnemyEntity> currentWaveEntities;
     private List<GameObject> currentWaveEnemyGOs;
 
@@ -111,20 +110,35 @@ public class EnemyWavesManager : MonoBehaviour
         int enemiesCount = levelParameters.enemiesPerWave[waveId];
         for (int i = 0; i < enemiesCount; i++)
         {
-            GameObject enemyGO = SpawnEnemy();
-            GameObject currentGun = Instantiate(defaultGun, enemyGO.transform, false);
+            int randEnemyType = Random.Range(0, 2);
+
+            GameObject enemyGO = SpawnEnemy(randEnemyType);
+            GameObject currentGun = null;
+            if ((randEnemyType + 1) == (int)EntityType.enemyFighterType)
+            {
+                currentGun = Instantiate(defaultGun, enemyGO.transform, false);
+            }
 
             currentWaveEnemyGOs.Add(enemyGO);
-            currentWaveEntities.Add(new EnemyEntity(0, currentWaveEnemyGOs[i], enemyData, currentGun));
+            EnemyEntity enemy = new EnemyEntity(
+                0, 
+                randEnemyType + 1,
+                currentWaveEnemyGOs[i],
+                enemyData[randEnemyType],
+                currentGun
+            );
+            currentWaveEntities.Add(enemy);
         }
     }
 
-    private GameObject SpawnEnemy()
+    private GameObject SpawnEnemy(int enemyType)
     {
-        Vector3 spawnLocation = UnityEngine.Random.insideUnitSphere * 5;
+        int randomSpawnLocation = UnityEngine.Random.Range(0, spawnLocations.Length);
+
+        Vector3 spawnLocation = spawnLocations[randomSpawnLocation].position + UnityEngine.Random.insideUnitSphere * 5;
         spawnLocation.y = 0;
 
-        return (GameObject)Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
+        return (GameObject)Instantiate(enemyPrefabs[enemyType], spawnLocation, Quaternion.identity);
 
     }
 
@@ -134,8 +148,8 @@ public class EnemyWavesManager : MonoBehaviour
 
         foreach (EnemyEntity enemy in toBeKilledEntities)
         {
-            int coinValue = Random.Range(enemy.EnemyData.minCoinValue, enemy.EnemyData.maxCoinValue);
-            CollectibleSpawnManager.Instance.SpawnCoinsAtPosition(coinValue, enemy.EnemyGO.transform.position);
+            int diamondValue = Random.Range(enemy.EnemyData.minDiamondValue, enemy.EnemyData.maxDiamondValue);
+            CollectibleSpawnManager.Instance.SpawnDiamondsAtPosition(diamondValue, enemy.EnemyGO.transform.position);
 
             currentWaveEnemyGOs.Remove(enemy.EnemyGO);
             currentWaveEntities.Remove(enemy);

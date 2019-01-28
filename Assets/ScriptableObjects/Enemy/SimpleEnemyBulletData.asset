@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f510db44636af3b40b58e7ec93e09d69, type: 3}
   m_Name: SimpleEnemyBulletData
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 8

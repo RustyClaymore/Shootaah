@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     public Transform[] Reactors { get => reactors; set => reactors = value; }
     public Image HealthBarImage { get => healthBarImage;  }
     public Image WeaponJamBarImage { get => weaponJamBarImage; }
+    public GameObject OrientationArrow { get => orientationArrow; }
 
     [SerializeField]
     private PlayerDataSO playerData;
@@ -27,6 +28,8 @@ public class PlayerManager : MonoBehaviour
     private Image healthBarImage;
     [SerializeField]
     private Image weaponJamBarImage;
+    [SerializeField]
+    private GameObject orientationArrow;
 
 
     [SerializeField]

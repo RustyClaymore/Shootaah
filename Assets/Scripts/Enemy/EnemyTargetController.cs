@@ -11,12 +11,18 @@ public class EnemyTargetController : MonoBehaviour
     public bool IsPlayerInChaseRange()
     {
         float distance = DistanceFromPlayer();
-        return distance <= enemyData.chaseDistance && distance > enemyData.shootDistance;
+        return distance <= enemyData.chaseDistance && distance > enemyData.maxShootDistance;
+    }
+
+    public bool IsPlayerInChaseShootRange()
+    {
+        float distance = DistanceFromPlayer();
+        return distance <= enemyData.chaseDistance && distance > enemyData.minShootDistance;
     }
 
     public bool IsPlayerInAttackRange()
     {
-        return DistanceFromPlayer() <= enemyData.shootDistance;
+        return DistanceFromPlayer() <= enemyData.maxShootDistance;
     }
 
     public bool IsPlayerOutOfRange()

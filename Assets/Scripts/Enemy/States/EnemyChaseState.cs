@@ -20,19 +20,12 @@ public class EnemyChaseState : State<EnemyEntity>
 
     public override void Enter(EnemyEntity enemy)
     {
-        Debug.Log("Enemy " + enemy.GetID() + " : Enetering chase state !");
     }
 
     public override void Execute(EnemyEntity enemy)
     {
-        Debug.Log("Enemy " + enemy.GetID() + " : Chasing player !");
-
-        // What should happen when he's roaming
-
-        // Check for condition to switch state
-        if (enemy.EnemyTargetController.IsPlayerInAttackRange())
+        if (enemy.EnemyTargetController.IsPlayerInAttackRange() && enemy.GetEntityType() == (int)EntityType.enemyFighterType)
         {
-            Debug.Log("Should be attacking player");
             enemy.GetFSM().ChangeState(EnemyShootState.Instance);
         }
         else if (enemy.EnemyTargetController.IsPlayerOutOfRange())
@@ -49,6 +42,5 @@ public class EnemyChaseState : State<EnemyEntity>
 
     public override void Exit(EnemyEntity enemy)
     {
-        Debug.Log("Enemy " + enemy.GetID() + " : Quitting chase state, can't catch him !");
     }
 }

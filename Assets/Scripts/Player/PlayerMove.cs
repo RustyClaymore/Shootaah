@@ -2,7 +2,6 @@
 
 public class PlayerMove : MonoBehaviour
 {
-
     public Transform[] Reactors { get => reactors; set => reactors = value; }
 
     private new Rigidbody rigidbody;
@@ -16,11 +15,16 @@ public class PlayerMove : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         targetSystem = GetComponent<PlayerTargetSystem>();
-        speed = PlayerManager.Instance.PlayerData.speed[PlayerManager.Instance.CurrentUpgradeLevels.speed];
+        speed = PlayerManager.Instance.PlayerData.speed.levelValues[PlayerManager.Instance.CurrentUpgradeLevels.speed];
     }
 
     void FixedUpdate()
     {
+        if (!SessionManager.Instance.IsGameStarted && SessionManager.Instance.IsGamePaused)
+        {
+            return;
+        }
+
         Move();
         if (targetSystem.IsAiming && targetSystem.TargetEnemy != null)
         {
@@ -65,8 +69,11 @@ public class PlayerMove : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(targetDirection, Vector3.up);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 0.7f);
 
-        Quaternion newReactorRotation = Quaternion.LookRotation(InputManager.Instance.MovementInput, Vector3.up);
-        RotateReactors(newReactorRotation);
+        if (IsMoving())
+        {
+            Quaternion newReactorRotation = Quaternion.LookRotation(InputManager.Instance.MovementInput, Vector3.up);
+            RotateReactors(newReactorRotation);
+        }
     }
 
     private void RotateReactors(Quaternion rotation)

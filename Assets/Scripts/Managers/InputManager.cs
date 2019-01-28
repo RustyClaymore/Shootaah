@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class InputManager : MonoBehaviour
 {
@@ -27,11 +28,25 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_ANDROID
+        movementInput.x = CrossPlatformInputManager.GetAxis("Horizontal");
+        movementInput.z = CrossPlatformInputManager.GetAxis("Vertical");
+
+        if (Input.touchCount > 0)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                attackButtonPressed = Input.GetTouch(i).position.x >= Screen.width / 2;
+                if (attackButtonPressed)
+                    break;
+            }
+        }
+#else
         movementInput.x = Input.GetAxis("Horizontal");
         movementInput.z = Input.GetAxis("Vertical");
-
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         attackButtonPressed = Input.GetKey(KeyCode.Space);
+#endif
     }
 }

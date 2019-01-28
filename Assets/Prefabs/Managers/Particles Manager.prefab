@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5205576535143911303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5205576535143911301}
+  - component: {fileID: 5205576535143911302}
+  m_Layer: 0
+  m_Name: Particles Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5205576535143911301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5205576535143911303}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5205576535143911302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5205576535143911303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d03a181389eb2644983d8a89d1a6f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smallPlayerExplosion: {fileID: 6692934338401074748, guid: 002d8466af6ab7b48933b9f64b16c7d4,
+    type: 3}
+  bigPlayerExplosion: {fileID: 9141989771478837869, guid: 4ef0d78ed6be61c4e8d3a678673aab3c,
+    type: 3}
+  smallEnemyExplosion: {fileID: 6692934338401074748, guid: e6f25fa54ff04af40b7c1791be90b2ec,
+    type: 3}
+  bigEnemyExplosion: {fileID: 9141989771478837869, guid: 6003d759971bd1b4993d9951408a96c3,
+    type: 3}
+  smallDiamondBlimp: {fileID: 9141989771478837869, guid: f6be21ba1e54c00409b9e38bf91d7ee1,
+    type: 3}
+  mediumDiamondBlimp: {fileID: 9141989771478837869, guid: 69db6dea0ea391d43947db79b57d841c,
+    type: 3}
+  largeDiamondBlimp: {fileID: 9141989771478837869, guid: a902a6dda0f500c45954759503a508a7,
+    type: 3}

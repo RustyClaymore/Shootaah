@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
+public struct Upgrade
+{
+    public string name;
+    public string description;
+    public float[] levelValues;
+    public int[] levelUpgradeCosts;
+}
+
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData", order = 1)]
 public class PlayerDataSO : ScriptableObject
 {
-    public int[] maxHealth;
-    public int[] healthRegen;
-    public float[] regenCooldown;
-
-    public float[] speed;
-
-    public float[] aimDistance;
+    public Upgrade maxHealth;
+    public Upgrade healthRegen;
+    public Upgrade regenCooldown;
+    public Upgrade speed;
+    public Upgrade aimDistance;
 }

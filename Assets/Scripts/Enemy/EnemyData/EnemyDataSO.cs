@@ -6,10 +6,13 @@ public class EnemyDataSO : ScriptableObject
     public int maxHealth;
     public float speed;
 
+    public int impactDamage;
+
     public float roamRadius;
     public float chaseDistance;
-    public float shootDistance;
+    public float maxShootDistance;
+    public float minShootDistance;
 
-    public int minCoinValue;
-    public int maxCoinValue;
+    public int minDiamondValue;
+    public int maxDiamondValue;
 }

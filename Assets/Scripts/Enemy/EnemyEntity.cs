@@ -19,15 +19,28 @@ public class EnemyEntity : BaseGameEntity
 
     private StateMachine<EnemyEntity> stateMachine;
 
-    public EnemyEntity(int id, GameObject enemyGO, EnemyDataSO enemyData, GameObject currentGun) : base(id, (int)EntityType.enemyEntityType)
+    public EnemyEntity(
+        int id,
+        int enemyType,
+        GameObject enemyGO,
+        EnemyDataSO enemyData,
+        GameObject currentGun
+    ) : base(id, enemyType)
     {
         stateMachine = new StateMachine<EnemyEntity>(this);
-        stateMachine.SetCurrentState(EnemyRoamState.Instance);
+        if (enemyType == (int)EntityType.enemyFighterType)
+        {
+            stateMachine.SetCurrentState(EnemyRoamState.Instance);
+        }
+        else if (enemyType == (int)EntityType.enemyKamikazeType)
+        {
+            stateMachine.SetCurrentState(EnemyChaseState.Instance);
+        }
         stateMachine.SetGlobalState(EnemyGlobalState.Instance);
 
         this.enemyGO = enemyGO;
         this.enemyData = enemyData;
-        
+
         enemyLifeController = enemyGO.AddComponent<EnemyLifeController>();
         enemyLifeController.EnemyData = enemyData;
         enemyLifeController.Init();
@@ -47,7 +60,7 @@ public class EnemyEntity : BaseGameEntity
     {
         stateMachine.Update();
     }
-    
+
     public override bool HandleMessage()
     {
         return base.HandleMessage();

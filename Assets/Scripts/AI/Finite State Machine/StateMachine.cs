@@ -26,6 +26,11 @@ public class StateMachine<EntityType>
     // Execute the global state and current state (every frame)
     public void Update()
     {
+        if(!SessionManager.Instance.IsGameStarted || SessionManager.Instance.IsGamePaused)
+        {
+            return;
+        }
+
         if (globalState != null)
             globalState.Execute(owner);
 

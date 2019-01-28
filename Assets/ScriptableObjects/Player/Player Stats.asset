@@ -12,17 +12,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae6125ad835caf4198ff0708d672948, type: 3}
   m_Name: Player Stats
   m_EditorClassIdentifier: 
-  maxHealth: 640000006e00000078000000820000008c00000096000000
-  healthRegen: 050000000a0000000f000000
+  maxHealth:
+    name: Max Health
+    description: Player's max health
+    levelValues:
+    - 100
+    - 110
+    - 120
+    - 130
+    - 140
+    - 150
+    levelUpgradeCosts: c8000000900100005802000020030000e8030000
+  healthRegen:
+    name: Health Regen Rate
+    description: Amount of regenerated health per tick
+    levelValues:
+    - 8
+    - 11
+    - 14
+    - 18
+    levelUpgradeCosts: f401000020030000b0040000
   regenCooldown:
-  - 0.5
-  - 0.4
-  - 0.3
+    name: Regen Cooldown
+    description: Time between health regen ticks
+    levelValues:
+    - 0.4
+    - 0.3
+    - 0.2
+    - 0.1
+    levelUpgradeCosts: 2c01000020030000b0040000
   speed:
-  - 15
-  - 16
-  - 17
+    name: Speed
+    description: Player's speed
+    levelValues:
+    - 16
+    - 17
+    - 18
+    - 20
+    levelUpgradeCosts: 2c01000058020000e8030000
   aimDistance:
-  - 30
-  - 35
-  - 40
+    name: Aim Distance
+    description: Player's auto aim distance
+    levelValues:
+    - 30
+    - 35
+    - 40
+    - 45
+    levelUpgradeCosts: 900100005802000020030000

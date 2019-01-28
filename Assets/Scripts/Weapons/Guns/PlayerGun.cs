@@ -44,6 +44,7 @@ public class PlayerGun : Gun
         jamTime = Time.time;
 
         GameObject proj = Instantiate(gunData.projectilePrefab, barrel.position, Quaternion.identity) as GameObject;
+        proj.transform.rotation = Quaternion.LookRotation(barrel.forward, Vector3.up);
         proj.GetComponent<Rigidbody>().AddForce(barrel.forward * gunData.speed, ForceMode.Impulse);
         Destroy(proj, 5);
 

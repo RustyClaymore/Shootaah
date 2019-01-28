@@ -24,7 +24,7 @@ public class BaseGameEntity
     protected BaseGameEntity(int id)
     {
         SetID(id);
-        entityType = (int)EntityType.defaultEntityType;
+        entityType = (int)EntityType.defaultType;
     }
 
     protected BaseGameEntity(int id, int entityType)

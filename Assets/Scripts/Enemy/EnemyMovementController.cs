@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class EnemyMovementController : MonoBehaviour
 {
@@ -7,6 +6,7 @@ public class EnemyMovementController : MonoBehaviour
     public bool IsMovingToNextTarget { get => isMovingToNextRoamTarget; set => isMovingToNextRoamTarget = value; }
     public Vector3 NextRoamTarget { get => nextRoamTarget; set => nextRoamTarget = value; }
     public bool IsMovingToNextRoamTarget { get => isMovingToNextRoamTarget; set => isMovingToNextRoamTarget = value; }
+    public bool HasImpactedPlayer { get => hasImpactedPlayer; }
 
     private new Rigidbody rigidbody;
     private EnemyDataSO enemyData;
@@ -14,14 +14,18 @@ public class EnemyMovementController : MonoBehaviour
     private bool isMovingToNextRoamTarget;
     private Vector3 nextRoamTarget;
 
+    private bool hasImpactedPlayer;
+
     public void Init()
     {
         rigidbody = GetComponent<Rigidbody>();
 
         isMovingToNextRoamTarget = false;
         nextRoamTarget = Vector3.zero;
-    }
 
+        hasImpactedPlayer = false;
+    }
+    
     public void MoveTowardsTarget()
     {
         rigidbody.MovePosition(transform.position + transform.forward * Time.fixedDeltaTime * enemyData.speed);
@@ -50,5 +54,15 @@ public class EnemyMovementController : MonoBehaviour
     public bool HasReachedRoamTarget()
     {
         return Vector3.Distance(transform.position, nextRoamTarget) <= 1;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        if (damageable is PlayerLife)
+        {
+            damageable.TakeDamage(enemyData.impactDamage);
+            hasImpactedPlayer = true;
+        }
     }
 }

@@ -6,9 +6,11 @@ public class PlayerCollectibleCollector : MonoBehaviour
     {
         ICollectible collectible = other.GetComponent<ICollectible>();
 
-        if (collectible != null && collectible.GetType() == Coin.CoinType)
+        if (collectible != null && collectible.GetType() == Diamond.DiamondType)
         {
-            SessionManager.Instance.IncreaseCoinAmount(collectible.GetValue());
+            SessionManager.Instance.IncreaseDiamondAmount(collectible.GetValue());
+            ParticlesManager.Instance.IntantiateDiamondBlimp(transform.position, collectible.GetValue());
+
             Destroy(other.gameObject);
         }
     }

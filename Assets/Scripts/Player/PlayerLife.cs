@@ -3,27 +3,31 @@
 public class PlayerLife : MonoBehaviour, IDamageable
 {
     public int CurrentHealth { get => currentHealth; }
+    public GameObject SmallExplosion { get => smallExplosion; set => smallExplosion = value; }
+    public GameObject BigExplosion { get => bigExplosion; set => bigExplosion = value; }
 
     private int playerMaxHealth;
     private int healthRegen;
     private float regenCooldown;
     
-    [SerializeField]
     private int currentHealth;
     private float currentRegenCooldown;
+
+    private GameObject smallExplosion;
+    private GameObject bigExplosion;
 
     void Start()
     {
         PlayerDataSO playerData = PlayerManager.Instance.PlayerData;
         UpgradeLevels currentUpgradeLevels = PlayerManager.Instance.CurrentUpgradeLevels;
 
-        playerMaxHealth = playerData.maxHealth[currentUpgradeLevels.maxHealth];
+        playerMaxHealth = (int)playerData.maxHealth.levelValues[currentUpgradeLevels.maxHealth];
         currentHealth = playerMaxHealth;
 
-        regenCooldown = playerData.regenCooldown[currentUpgradeLevels.regenCooldown];
+        regenCooldown = playerData.regenCooldown.levelValues[currentUpgradeLevels.regenCooldown];
         currentRegenCooldown = regenCooldown;
 
-        healthRegen = playerData.healthRegen[currentUpgradeLevels.healthRegen];
+        healthRegen = (int)playerData.healthRegen.levelValues[currentUpgradeLevels.healthRegen];
     }
 
     void Update()
@@ -46,6 +50,11 @@ public class PlayerLife : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
+        if (damage <= 15)
+            ParticlesManager.Instance.InstantiateSmallPlayerExplosion(transform.position);
+        else
+            ParticlesManager.Instance.InstantiateBigPlayerExplosion(transform.position);
+        
         currentHealth -= damage;
     }
 

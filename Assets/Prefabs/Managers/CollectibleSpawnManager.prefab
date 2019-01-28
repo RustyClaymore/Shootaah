@@ -43,9 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9582e850ae84eee478a22a0dad1c1439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallCoinPrefab: {fileID: 3226582131682572592, guid: 9fa61370bc24b2648857f15401abcb4a,
+  smallDiamondPrefab: {fileID: 5846788856118938874, guid: 2155ff71a5f854947a83dde753203758,
     type: 3}
-  mediumCoinPrefab: {fileID: 2844522736520198128, guid: 725fd07dfdceab14b9a0bd2fbd33120d,
+  mediumDiamondPrefab: {fileID: 1314048494717238942, guid: 75988cb80e9cd2144954f78e9a9b90e0,
     type: 3}
-  largeCoinPrefab: {fileID: 2728849086811280084, guid: 3d629facf3b87454e8d5bf6b039a528a,
+  largeDiamondPrefab: {fileID: 7560586052028477499, guid: 4182ef7cd0b971341a1a9f44bd449862,
     type: 3}

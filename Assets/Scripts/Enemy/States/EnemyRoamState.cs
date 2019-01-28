@@ -20,14 +20,11 @@ public class EnemyRoamState : State<EnemyEntity>
 
     public override void Enter(EnemyEntity enemy)
     {
-        Debug.Log("Enemy " + enemy.GetID() + " : Enetering roam state !");
         enemy.EnemyMovementController.IsMovingToNextTarget = false;
     }
 
     public override void Execute(EnemyEntity enemy)
     {
-        Debug.Log("Enemy " + enemy.GetID() + " : Roaming !");
-
         // What should happen when he's roaming
         if (!enemy.EnemyMovementController.IsMovingToNextTarget || enemy.EnemyMovementController.HasReachedRoamTarget())
         {
@@ -40,7 +37,7 @@ public class EnemyRoamState : State<EnemyEntity>
         {
             enemy.GetFSM().ChangeState(EnemyChaseState.Instance);
         }
-        else if (enemy.EnemyTargetController.IsPlayerInAttackRange())
+        else if (enemy.EnemyTargetController.IsPlayerInAttackRange() && enemy.GetEntityType() == (int)EntityType.enemyFighterType)
         {
             enemy.GetFSM().ChangeState(EnemyShootState.Instance);
         }
@@ -54,7 +51,6 @@ public class EnemyRoamState : State<EnemyEntity>
 
     public override void Exit(EnemyEntity enemy)
     {
-        Debug.Log("Enemy " + enemy.GetID() + " : Enough roaming, time for some action !");
         enemy.EnemyMovementController.IsMovingToNextTarget = false;
     }
 }

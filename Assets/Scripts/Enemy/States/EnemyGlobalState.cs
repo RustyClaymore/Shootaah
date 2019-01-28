@@ -20,19 +20,14 @@ public class EnemyGlobalState : State<EnemyEntity>
 
     public override void Execute(EnemyEntity enemy)
     {
+        if (enemy.EnemyMovementController.HasImpactedPlayer)
+        {
+            enemy.EnemyLifeController.TakeDamage(enemy.EnemyData.maxHealth);
+        }
+
         if(enemy.EnemyLifeController.IsDead())
         {
             EnemyWavesManager.Instance.Kill(enemy);
         }
-        /*
-        if (enemy.IsFleeing && !enemy.IsAttacking && (enemy.GetFSM().GetCurrentState() != KnightEscapeEnemiesState.Instance))
-        {
-            enemy.GetFSM().ChangeState(KnightEscapeEnemiesState.Instance);
-        }
-
-        if (enemy.IsAttacking && (enemy.GetFSM().GetCurrentState() != KnightChaseEnemyState.Instance) && (enemy.GetFSM().GetCurrentState() != KnightAttackEnemyState.Instance))
-        {
-            enemy.GetFSM().ChangeState(KnightChaseEnemyState.Instance);
-        }*/
     }
 }

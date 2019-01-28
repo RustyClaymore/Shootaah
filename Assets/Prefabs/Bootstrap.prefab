@@ -53,3 +53,5 @@ MonoBehaviour:
     type: 3}
   collectibleSpawnManager: {fileID: 7243873565629473911, guid: 9b2cb4656f4383849bd971e192567682,
     type: 3}
+  particlesManager: {fileID: 5205576535143911303, guid: 6b4dbb4106ba35f4d858a9bca6283f10,
+    type: 3}

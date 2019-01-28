@@ -19,6 +19,11 @@ public class EnemyLifeController : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
+        if (damage <= 10)
+            ParticlesManager.Instance.InstantiateSmallEnemyExplosion(transform.position);
+        else
+            ParticlesManager.Instance.InstantiateBigEnemyExplosion(transform.position);
+
         enemyLife -= damage;
     }
 }
