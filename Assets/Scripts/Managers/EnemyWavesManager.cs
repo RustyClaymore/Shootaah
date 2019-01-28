@@ -7,6 +7,8 @@ public class EnemyWavesManager : MonoBehaviour
     public static EnemyWavesManager Instance { get; private set; }
 
     [SerializeField]
+    private GameObject coinPrefab;
+    [SerializeField]
     private GameObject enemyPrefab;
     [SerializeField]
     private LevelParametersSO levelParameters;
@@ -80,7 +82,7 @@ public class EnemyWavesManager : MonoBehaviour
 
         KillDeadEnemies();
     }
-    
+
     public GameObject[] GetCurrentEnemiesGOsArray()
     {
         if (currentWaveEnemyGOs.Count == 0)
@@ -132,6 +134,9 @@ public class EnemyWavesManager : MonoBehaviour
 
         foreach (EnemyEntity enemy in toBeKilledEntities)
         {
+            int coinValue = Random.Range(enemy.EnemyData.minCoinValue, enemy.EnemyData.maxCoinValue);
+            CollectibleSpawnManager.Instance.SpawnCoinsAtPosition(coinValue, enemy.EnemyGO.transform.position);
+
             currentWaveEnemyGOs.Remove(enemy.EnemyGO);
             currentWaveEntities.Remove(enemy);
             Destroy(enemy.EnemyGO);

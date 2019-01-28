@@ -17,3 +17,5 @@ MonoBehaviour:
   roamRadius: 30
   chaseDistance: 50
   shootDistance: 30
+  minCoinValue: 3
+  maxCoinValue: 7

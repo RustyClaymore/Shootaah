@@ -17,7 +17,7 @@ MonoBehaviour:
   speed: 100
   fireRate: 10
   jamThreshold: 100
-  jamRate: 1
-  jamFixRate: 10
+  jamRate: 3
+  jamFixRate: 15
   timeBeforeFixStart: 1
   timeBetweenFixes: 0.2

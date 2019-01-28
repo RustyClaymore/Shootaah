@@ -7,6 +7,7 @@ public class EnemyEntity : BaseGameEntity
     public EnemyShootController EnemyShootController { get => enemyShootController; }
     public EnemyLifeController EnemyLifeController { get => enemyLifeController; }
     public GameObject EnemyGO { get => enemyGO; }
+    public EnemyDataSO EnemyData { get => enemyData; }
 
     private GameObject enemyGO;
     private EnemyDataSO enemyData;

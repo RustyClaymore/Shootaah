@@ -2,6 +2,8 @@
 
 public class PlayerLife : MonoBehaviour, IDamageable
 {
+    public int CurrentHealth { get => currentHealth; }
+
     private int playerMaxHealth;
     private int healthRegen;
     private float regenCooldown;

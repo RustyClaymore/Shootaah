@@ -9,4 +9,7 @@ public class EnemyDataSO : ScriptableObject
     public float roamRadius;
     public float chaseDistance;
     public float shootDistance;
+
+    public int minCoinValue;
+    public int maxCoinValue;
 }

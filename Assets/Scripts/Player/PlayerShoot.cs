@@ -9,7 +9,7 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         IGun playerGun = currentGun.GetComponent<IGun>();
-        if (InputManager.Instance.Button1Pressed)
+        if (InputManager.Instance.AttackButtonPressed)
         {
             int damage = playerGun.Shot();
         } else

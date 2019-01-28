@@ -2,12 +2,14 @@
 
 public class PlayerGun : Gun
 {
+    public float CurrentJamRate { get => currentJamRate; }
+
     protected bool isFixingJam;
     protected float jamTime;
     
     private float currentJamCooldown;
     private float currentJamRate;
-    
+
     public override void Start()
     {
         base.Start();

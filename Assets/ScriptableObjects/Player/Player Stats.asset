@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player Stats
   m_EditorClassIdentifier: 
   maxHealth: 640000006e00000078000000820000008c00000096000000
-  healthRegen: 0a000000140000001e000000
+  healthRegen: 050000000a0000000f000000
   regenCooldown:
   - 0.5
   - 0.4

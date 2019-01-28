@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
 
     public PlayerMove PlayerMove { get => playerMove; }
-    public PlayerShoot PlayerShot { get => playerShoot; }
+    public PlayerShoot PlayerShoot { get => playerShoot; }
     public PlayerLife PlayerLife { get => playerLife; }
     public PlayerTargetSystem TargetSystem { get => targetSystem; }
+    public PlayerCollectibleCollector CollectibleCollector { get => collectibleCollector; }
+
     public PlayerDataSO PlayerData { get => playerData; }
     public UpgradeLevels CurrentUpgradeLevels { get => currentUpgradeLevels; }
     public Transform[] Reactors { get => reactors; set => reactors = value; }
+    public Image HealthBarImage { get => healthBarImage;  }
+    public Image WeaponJamBarImage { get => weaponJamBarImage; }
 
     [SerializeField]
     private PlayerDataSO playerData;
@@ -18,6 +23,11 @@ public class PlayerManager : MonoBehaviour
     private GameObject defaultGun;
     [SerializeField]
     private Transform[] reactors;
+    [SerializeField]
+    private Image healthBarImage;
+    [SerializeField]
+    private Image weaponJamBarImage;
+
 
     [SerializeField]
     private UpgradeLevels currentUpgradeLevels;
@@ -26,6 +36,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerShoot playerShoot;
     private PlayerLife playerLife;
     private PlayerTargetSystem targetSystem;
+    private PlayerCollectibleCollector collectibleCollector;
 
     void Awake()
     {
@@ -50,5 +61,7 @@ public class PlayerManager : MonoBehaviour
         playerShoot.CurrentGun = currentGun;
 
         playerLife = gameObject.AddComponent<PlayerLife>() as PlayerLife;
+
+        collectibleCollector = gameObject.AddComponent<PlayerCollectibleCollector>() as PlayerCollectibleCollector;
     }
 }

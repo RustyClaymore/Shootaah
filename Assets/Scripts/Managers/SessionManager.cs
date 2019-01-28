@@ -8,6 +8,7 @@ public class SessionManager : MonoBehaviour
     public bool IsGamePaused { get => isGamePaused; }
     public bool MissionCompleted { get => missionCompleted; }
     public bool MissionFailed { get => missionFailed; }
+    public int CollectedCoinAmount { get => collectedCoinAmount; }
 
     [SerializeField]
     private GameObject playerPrefab;
@@ -17,6 +18,8 @@ public class SessionManager : MonoBehaviour
     private bool isGameStarted;
     private bool missionCompleted;
     private bool missionFailed;
+
+    private int collectedCoinAmount;
 
     void Awake()
     {
@@ -34,6 +37,8 @@ public class SessionManager : MonoBehaviour
         isGameStarted = true;
         missionCompleted = false;
         missionFailed = false;
+
+        collectedCoinAmount = 0;
     }
 
     void Update()
@@ -47,6 +52,21 @@ public class SessionManager : MonoBehaviour
         {
             Debug.Log("Mission Failed");
         }
+    }
+
+    public void IncreaseCoinAmount(int amount)
+    {
+        collectedCoinAmount += amount;
+    }
+    
+    public void SaveCollectedCoinAmount()
+    {
+        PlayerPrefs.SetInt(Coin.CoinType, GetPlayerCoinAmount() + collectedCoinAmount);
+    }
+
+    public int GetPlayerCoinAmount()
+    {
+        return PlayerPrefs.GetInt(Coin.CoinType, 0);
     }
 
     public void CompleteMission()
