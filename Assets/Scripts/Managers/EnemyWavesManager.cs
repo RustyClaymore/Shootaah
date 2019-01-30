@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyWavesManager : MonoBehaviour
@@ -71,7 +72,7 @@ public class EnemyWavesManager : MonoBehaviour
             canSpawnEnemy = false;
             cooldownBeforeStartSpawning = levelParameters.timeBeforeWaveSpawn;
 
-            SpawnWave(waveCounter);
+            StartCoroutine(SpawnWave(waveCounter));
         }
 
         foreach (EnemyEntity enemy in currentWaveEntities)
@@ -102,43 +103,63 @@ public class EnemyWavesManager : MonoBehaviour
         return waveCounter == maxWaves;
     }
 
-    private void SpawnWave(int waveId)
+    private IEnumerator SpawnWave(int waveId)
     {
         currentWaveEntities = new List<EnemyEntity>();
         currentWaveEnemyGOs = new List<GameObject>();
 
         int enemiesCount = levelParameters.enemiesPerWave[waveId];
+        int[] spawnedEnemyTypes = new int[enemiesCount];
+        Vector3[] spawnedEnemyLocations = new Vector3[enemiesCount];
+
+        SpawnEnemySpawnIndictarors(enemiesCount, spawnedEnemyTypes, spawnedEnemyLocations);
+        yield return new WaitForSeconds(1.5f);
+        SpawnEnemies(enemiesCount, spawnedEnemyTypes, spawnedEnemyLocations);
+    }
+
+    private void SpawnEnemySpawnIndictarors(int enemiesCount, int[] spawnedEnemyTypes, Vector3[] spawnedEnemyLocations)
+    {
         for (int i = 0; i < enemiesCount; i++)
         {
             int randEnemyType = Random.Range(0, 2);
+            spawnedEnemyTypes[i] = randEnemyType;
 
-            GameObject enemyGO = SpawnEnemy(randEnemyType);
+            int randomSpawnLocation = UnityEngine.Random.Range(0, spawnLocations.Length);
+            Vector3 spawnLocation = spawnLocations[randomSpawnLocation].position + UnityEngine.Random.insideUnitSphere * 5;
+            spawnLocation.y = 0;
+            spawnedEnemyLocations[i] = spawnLocation;
+
+            ParticlesManager.Instance.InstantiateEnemySpawnParticle(spawnLocation, 1.4f);
+        }
+    }
+
+    private void SpawnEnemies(int enemiesCount, int[] spawnedEnemyTypes, Vector3[] spawnedEnemyLocations)
+    {
+        for (int i = 0; i < enemiesCount; i++)
+        {
+            GameObject enemyGO = SpawnEnemy(spawnedEnemyTypes[i], spawnedEnemyLocations[i]);
+
             GameObject currentGun = null;
-            if ((randEnemyType + 1) == (int)EntityType.enemyFighterType)
+            if ((spawnedEnemyTypes[i] + 1) == (int)EntityType.enemyFighterType)
             {
                 currentGun = Instantiate(defaultGun, enemyGO.transform, false);
             }
 
             currentWaveEnemyGOs.Add(enemyGO);
             EnemyEntity enemy = new EnemyEntity(
-                0, 
-                randEnemyType + 1,
+                0,
+                spawnedEnemyTypes[i] + 1,
                 currentWaveEnemyGOs[i],
-                enemyData[randEnemyType],
+                enemyData[spawnedEnemyTypes[i]],
                 currentGun
             );
             currentWaveEntities.Add(enemy);
         }
     }
 
-    private GameObject SpawnEnemy(int enemyType)
+    private GameObject SpawnEnemy(int enemyType, Vector3 position)
     {
-        int randomSpawnLocation = UnityEngine.Random.Range(0, spawnLocations.Length);
-
-        Vector3 spawnLocation = spawnLocations[randomSpawnLocation].position + UnityEngine.Random.insideUnitSphere * 5;
-        spawnLocation.y = 0;
-
-        return (GameObject)Instantiate(enemyPrefabs[enemyType], spawnLocation, Quaternion.identity);
+        return (GameObject)Instantiate(enemyPrefabs[enemyType], position, Quaternion.identity);
 
     }
 

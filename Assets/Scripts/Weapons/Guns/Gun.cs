@@ -4,7 +4,7 @@ public abstract class Gun : MonoBehaviour, IGun
 {
     public bool IsShooting { get => isShooting; set => isShooting = value; }
     public GunDataSO gunData;
-    public Transform barrel;
+    public Transform[] barrels;
 
     protected bool isShooting;
 

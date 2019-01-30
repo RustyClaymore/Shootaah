@@ -4,11 +4,15 @@ public class ParticlesManager : MonoBehaviour
 {
     public static ParticlesManager Instance { get; private set; }
 
+    public float explosionDuration;
+
     [Header("Player Particles")]
+    public GameObject playerDeathExplosion;
     public GameObject smallPlayerExplosion;
     public GameObject bigPlayerExplosion;
 
     [Header("Enemy Particles")]
+    public GameObject enemySpawnParticle;
     public GameObject smallEnemyExplosion;
     public GameObject bigEnemyExplosion;
 
@@ -29,28 +33,40 @@ public class ParticlesManager : MonoBehaviour
         }
     }
 
+    public void InstantiatePlayerDeathExplosion(Vector3 position)
+    {
+        GameObject explosion = Instantiate(playerDeathExplosion, position, Quaternion.identity);
+        Destroy(explosion, explosionDuration);
+    }
+
+    public void InstantiateEnemySpawnParticle(Vector3 position, float duration)
+    {
+        GameObject spawnParticle = Instantiate(enemySpawnParticle, position, Quaternion.identity);
+        Destroy(spawnParticle, duration);
+    }
+
     public void InstantiateSmallPlayerExplosion(Vector3 position)
     {
         GameObject explosion = Instantiate(smallPlayerExplosion, position, Quaternion.identity);
-        Destroy(explosion, 1);
+        Destroy(explosion, explosionDuration);
     }
 
     public void InstantiateBigPlayerExplosion(Vector3 position)
     {
         GameObject explosion = Instantiate(bigPlayerExplosion, position, Quaternion.identity);
-        Destroy(explosion, 1);
+        Destroy(explosion, explosionDuration);
     }
 
     public void InstantiateSmallEnemyExplosion(Vector3 position)
     {
         GameObject explosion = Instantiate(smallEnemyExplosion, position, Quaternion.identity);
-        Destroy(explosion, 1);
+        Destroy(explosion, explosionDuration);
     }
 
     public void InstantiateBigEnemyExplosion(Vector3 position)
     {
         GameObject explosion = Instantiate(bigEnemyExplosion, position, Quaternion.identity);
-        Destroy(explosion, 1);
+        Destroy(explosion, explosionDuration);
     }
 
     public void IntantiateDiamondBlimp(Vector3 position, int diamondAmount)

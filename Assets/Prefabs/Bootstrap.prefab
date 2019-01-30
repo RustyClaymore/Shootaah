@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiLevelManager: {fileID: 5814029337358287244, guid: f595e953db5c484488e4eddf2553c6ae,
     type: 3}
+  mobileInputPrefab: {fileID: 3323773279983503318, guid: 3ddb7c89943463f49be330899fab3bb1,
+    type: 3}
   inputManager: {fileID: 8057505781378352246, guid: 79fd3c3bbb1271349987ce893747c2f0,
     type: 3}
   sessionManager: {fileID: 6371530516422949714, guid: c866049002d0b424e95cd8ed60ca68da,

@@ -12,10 +12,11 @@ public class EnemyGun : Gun
         IsShooting = true;
 
         ResetCooldown();
-
-        GameObject proj = Instantiate(gunData.projectilePrefab, barrel.position, Quaternion.identity) as GameObject;
-        proj.transform.rotation = Quaternion.LookRotation(barrel.forward, Vector3.up);
-        proj.GetComponent<Rigidbody>().AddForce(barrel.forward * gunData.speed, ForceMode.Impulse);
+        
+        int randomBarrel = Random.Range(0, barrels.Length);
+        GameObject proj = Instantiate(gunData.projectilePrefab, barrels[randomBarrel].position, Quaternion.identity) as GameObject;
+        proj.transform.rotation = Quaternion.LookRotation(barrels[randomBarrel].forward, Vector3.up);
+        proj.GetComponent<Rigidbody>().AddForce(barrels[randomBarrel].forward * gunData.speed, ForceMode.Impulse);
         Destroy(proj, 5);
 
         return gunData.projectilePrefab.GetComponent<IProjectile>().GetDamage();

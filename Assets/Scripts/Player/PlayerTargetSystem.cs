@@ -25,6 +25,11 @@ public class PlayerTargetSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SessionManager.Instance.IsGamePaused || !SessionManager.Instance.IsGameStarted)
+        {
+            return;
+        }
+
         enemies = EnemyWavesManager.Instance.GetCurrentEnemiesGOsArray();
      
         GameObject closestEnemy = GetClosestTargetableEnemy(enemies);

@@ -35,14 +35,14 @@ public class EnemyMovementController : MonoBehaviour
     {
         Vector3 targetDirection = SessionManager.Instance.CurrentPlayer.transform.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-        transform.rotation = rotation;
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 0.1f);
     }
 
     public void LookAtNextRoamTarget()
     {
         Vector3 targetDirection = nextRoamTarget - transform.position;
         Quaternion rotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-        transform.rotation = rotation;
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 0.1f);
     }
 
     public void SelectNextRoamTarget()

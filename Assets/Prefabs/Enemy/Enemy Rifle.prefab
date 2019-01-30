@@ -266,4 +266,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: c41818bd517524c4c9ff69f53cd17b6f, type: 2}
-  barrel: {fileID: 695009120129913017}
+  barrels:
+  - {fileID: 695009120129913017}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.06137567, g: 0.06497085, b: 0.07775112, a: 1}
+  m_IndirectSpecularColor: {r: 0.06149035, g: 0.06480904, b: 0.0782625, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -309,8 +309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6f901a8f21caf459956fe886f33df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothSpeed: 0.1
-  offset: {x: 0, y: 30, z: -20}
 --- !u!1 &673339587
 GameObject:
   m_ObjectHideFlags: 0
@@ -9843,7 +9841,7 @@ PrefabInstance:
     - target: {fileID: 4853337642218114, guid: dca78d9e597048346b09d342bf3e21cd, type: 3}
       propertyPath: uiLevelManager
       value: 
-      objectReference: {fileID: 5814029337358287244, guid: 9ce5297adc00bba45858c8c2328642d0,
+      objectReference: {fileID: 696811255329476205, guid: 0d7e8b371b68aa54b90cd8fe6ab8d6bc,
         type: 3}
     - target: {fileID: 4853337642218114, guid: dca78d9e597048346b09d342bf3e21cd, type: 3}
       propertyPath: mobileInputPrefab

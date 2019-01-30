@@ -9,7 +9,7 @@ public class PlayerLife : MonoBehaviour, IDamageable
     private int playerMaxHealth;
     private int healthRegen;
     private float regenCooldown;
-    
+
     private int currentHealth;
     private float currentRegenCooldown;
 
@@ -32,6 +32,11 @@ public class PlayerLife : MonoBehaviour, IDamageable
 
     void Update()
     {
+        if (SessionManager.Instance.IsGamePaused || !SessionManager.Instance.IsGameStarted)
+        {
+            return;
+        }
+
         if (!PlayerManager.Instance.PlayerMove.IsMoving())
         {
             currentRegenCooldown -= Time.deltaTime;
@@ -45,6 +50,12 @@ public class PlayerLife : MonoBehaviour, IDamageable
         if (IsDead())
         {
             SessionManager.Instance.FailMission();
+            ParticlesManager.Instance.InstantiatePlayerDeathExplosion(transform.position);
+            int children = transform.childCount;
+            for (int i = 0; i < children; ++i)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
     }
 
@@ -54,7 +65,7 @@ public class PlayerLife : MonoBehaviour, IDamageable
             ParticlesManager.Instance.InstantiateSmallPlayerExplosion(transform.position);
         else
             ParticlesManager.Instance.InstantiateBigPlayerExplosion(transform.position);
-        
+
         currentHealth -= damage;
     }
 
@@ -67,7 +78,7 @@ public class PlayerLife : MonoBehaviour, IDamageable
     {
         return currentHealth <= 0;
     }
-    
+
     private void PeriodicHeal(int healAmount)
     {
         if (currentHealth < playerMaxHealth && currentRegenCooldown <= 0)

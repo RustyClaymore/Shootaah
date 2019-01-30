@@ -4,4 +4,6 @@
 public class ProjectileDataSO : ScriptableObject
 {
     public int damage;
+
+    public float maxHomingSpeed;
 }

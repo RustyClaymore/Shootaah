@@ -20,6 +20,11 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (SessionManager.Instance.IsGamePaused || !SessionManager.Instance.IsGameStarted)
+        {
+            return;
+        }
+
         if (!SessionManager.Instance.IsGameStarted && SessionManager.Instance.IsGamePaused)
         {
             return;

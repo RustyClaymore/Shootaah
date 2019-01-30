@@ -2,17 +2,23 @@
 
 public class PlayerShoot : MonoBehaviour
 {
-    private GameObject currentGun;
+    public GameObject currentGun;
 
     public GameObject CurrentGun { get => currentGun; set => currentGun = value; }
 
     void Update()
     {
+        if (SessionManager.Instance.IsGamePaused || !SessionManager.Instance.IsGameStarted)
+        {
+            return;
+        }
+
         IGun playerGun = currentGun.GetComponent<IGun>();
         if (InputManager.Instance.AttackButtonPressed)
         {
             int damage = playerGun.Shot();
-        } else
+        }
+        else
         {
             playerGun.IsShooting = false;
         }

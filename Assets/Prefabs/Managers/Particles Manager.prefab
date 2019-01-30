@@ -43,9 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03a181389eb2644983d8a89d1a6f65b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionDuration: 0.5
+  playerDeathExplosion: {fileID: 5091619988266292309, guid: 45e9f98dba42b564f9e1b6eb694c5be9,
+    type: 3}
   smallPlayerExplosion: {fileID: 6692934338401074748, guid: 002d8466af6ab7b48933b9f64b16c7d4,
     type: 3}
   bigPlayerExplosion: {fileID: 9141989771478837869, guid: 4ef0d78ed6be61c4e8d3a678673aab3c,
+    type: 3}
+  enemySpawnParticle: {fileID: 8116436540757033477, guid: 786c25fc8996e1044bd6b6a4a0afd882,
     type: 3}
   smallEnemyExplosion: {fileID: 6692934338401074748, guid: e6f25fa54ff04af40b7c1791be90b2ec,
     type: 3}

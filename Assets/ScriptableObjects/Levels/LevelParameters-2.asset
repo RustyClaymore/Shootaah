@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad8d653117573a469dfc7c05d8c254a, type: 3}
   m_Name: LevelParameters-2
   m_EditorClassIdentifier: 
-  enemiesPerWave: 06000000080000000a0000000c000000
-  spawnLocations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  timeBeforeWaveSpawn: 4
+  enemiesPerWave: 0400000006000000080000000a000000
+  timeBeforeWaveSpawn: 5

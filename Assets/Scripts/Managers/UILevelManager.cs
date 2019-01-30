@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class UILevelManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class UILevelManager : MonoBehaviour
     public GameObject logo;
     public GameObject replayButton;
     public GameObject mainMenuButton;
+    public GameObject blackOverlay;
     [Header("Win Screen")]
     public GameObject missionComplete;
     public GameObject objectifMedal1;
@@ -53,7 +55,7 @@ public class UILevelManager : MonoBehaviour
         if (PlayerManager.Instance)
         {
             playerHealthBar.fillAmount = PlayerManager.Instance.PlayerLife.CurrentHealth / 100f;
-            playerWeaponJamBar.fillAmount = PlayerManager.Instance.PlayerShoot.CurrentGun.GetComponent<PlayerGun>().CurrentJamRate / 100f;
+            playerWeaponJamBar.fillAmount = PlayerManager.Instance.PlayerShoot.CurrentGun.GetComponent<PlayerJammableGun>().CurrentJamRate / 100f;
         }
 
         if (SessionManager.Instance)
@@ -61,7 +63,7 @@ public class UILevelManager : MonoBehaviour
             diamondsText.text = SessionManager.Instance.CollectedDiamondAmount.ToString();
         }
     }
-    
+
     private void DeactivateEndScreenUI()
     {
         missionComplete.SetActive(false);
@@ -73,6 +75,7 @@ public class UILevelManager : MonoBehaviour
         logo.SetActive(false);
         replayButton.SetActive(false);
         mainMenuButton.SetActive(false);
+        blackOverlay.SetActive(false);
     }
 
     public void ActivateWinScreenUI()
@@ -108,6 +111,7 @@ public class UILevelManager : MonoBehaviour
 
     private void ActivateEndScreenUI()
     {
+        blackOverlay.SetActive(true);
         logo.SetActive(true);
         replayButton.SetActive(true);
         mainMenuButton.SetActive(true);

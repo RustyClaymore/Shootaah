@@ -341,7 +341,7 @@ RectTransform:
   m_GameObject: {fileID: 4949603664669498906}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -1.5000002}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5481763674807982759}
   m_RootOrder: 1
@@ -379,7 +379,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: c164ffa58f584cb42b7c427efecf7599, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -471,8 +471,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: aefea98749d1d204eb945fbf0c52d5a3, type: 2}
-  defaultGun: {fileID: 2667513197090672599, guid: 61b5615b012ef844bb8f760287c732b2,
-    type: 3}
+  defaultGuns:
+  - {fileID: 2667513197090672599, guid: 61b5615b012ef844bb8f760287c732b2, type: 3}
+  - {fileID: 7104139030682611862, guid: 022ae635f343bad4fbe8e774900fbf14, type: 3}
   reactors:
   - {fileID: 4551379317360812590}
   - {fileID: 3515692163128185242}
@@ -542,7 +543,7 @@ RectTransform:
   m_GameObject: {fileID: 6025422545509945432}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -1.5}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5481763674807982759}
   m_RootOrder: 0
@@ -580,7 +581,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: c164ffa58f584cb42b7c427efecf7599, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

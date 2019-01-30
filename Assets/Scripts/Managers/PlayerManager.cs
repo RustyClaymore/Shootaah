@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private PlayerDataSO playerData;
     [SerializeField]
-    private GameObject defaultGun;
+    private GameObject[] defaultGuns;
     [SerializeField]
     private Transform[] reactors;
     [SerializeField]
@@ -60,11 +60,21 @@ public class PlayerManager : MonoBehaviour
         playerMove.Reactors = reactors;
 
         playerShoot = gameObject.AddComponent<PlayerShoot>() as PlayerShoot;
-        GameObject currentGun = Instantiate(defaultGun, this.transform, false);
+
+        // This is very dirty and is only used as a placeholder until a shop system for weapons is created
+        // TODO: Create weapon shop system
+        GameObject currentGun;
+        if (PlayerPrefs.GetString("CurrentWeapon", "MissileLauncher") == "MissileLauncher")
+        {
+            currentGun = Instantiate(defaultGuns[0], this.transform, false);
+        }
+        else
+        {
+            currentGun = Instantiate(defaultGuns[1], this.transform, false);
+        }
         playerShoot.CurrentGun = currentGun;
 
         playerLife = gameObject.AddComponent<PlayerLife>() as PlayerLife;
-
         collectibleCollector = gameObject.AddComponent<PlayerCollectibleCollector>() as PlayerCollectibleCollector;
     }
 }

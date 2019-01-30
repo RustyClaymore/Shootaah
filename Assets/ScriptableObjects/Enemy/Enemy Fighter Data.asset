@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c3cc73fe3e29946846f1a1cce69b23, type: 3}
   m_Name: Enemy Fighter Data
   m_EditorClassIdentifier: 
-  maxHealth: 50
-  speed: 10
-  impactDamage: 25
+  maxHealth: 40
+  speed: 11
+  impactDamage: 20
   roamRadius: 30
-  chaseDistance: 50
+  chaseDistance: 35
   maxShootDistance: 30
   minShootDistance: 10
   minDiamondValue: 7

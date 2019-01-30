@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class SessionManager : MonoBehaviour
 {
@@ -6,16 +7,18 @@ public class SessionManager : MonoBehaviour
     public GameObject CurrentPlayer { get => currentPlayer; }
     public bool IsGameStarted { get => isGameStarted; }
     public bool IsGamePaused { get => isGamePaused; }
+    public bool IsGameEnded { get => isGameEnded; }
     public bool MissionCompleted { get => missionCompleted; }
     public bool MissionFailed { get => missionFailed; }
     public int CollectedDiamondAmount { get => collectedDiamondAmount; }
-    
+
     [SerializeField]
     private GameObject playerPrefab;
     private GameObject currentPlayer;
 
     private bool isGamePaused;
     private bool isGameStarted;
+    private bool isGameEnded;
     private bool missionCompleted;
     private bool missionFailed;
 
@@ -36,27 +39,31 @@ public class SessionManager : MonoBehaviour
         }
 
         currentPlayer = Instantiate(playerPrefab, new Vector3(0, 0, -5), Quaternion.identity) as GameObject;
+
         isGamePaused = false;
         isGameStarted = true;
+        isGameEnded = false;
+
         missionCompleted = false;
         missionFailed = false;
 
         collectedDiamondAmount = 0;
         diamondsSaved = false;
 
-        countDownBeforeEndScreen = 5;
+        countDownBeforeEndScreen = 2;
     }
 
     void Update()
     {
         if (missionCompleted)
         {
+            isGameEnded = true;
+
+            isGamePaused = true;
+            
             countDownBeforeEndScreen -= Time.deltaTime;
             if (countDownBeforeEndScreen <= 0)
             {
-                isGamePaused = true;
-                isGameStarted = false;
-
                 UILevelManager.Instance.ActivateWinScreenUI();
                 SaveCollectedDiamondAmount();
             }
@@ -64,11 +71,17 @@ public class SessionManager : MonoBehaviour
 
         if (missionFailed)
         {
-            isGamePaused = true;
-            isGameStarted = false;
+            isGameEnded = true;
 
-            collectedDiamondAmount = 0;
-            UILevelManager.Instance.ActivateLoseScreenUI();
+            isGamePaused = true;
+            
+            countDownBeforeEndScreen -= Time.deltaTime;
+            if (countDownBeforeEndScreen <= 0)
+            {
+                collectedDiamondAmount = 0;
+
+                UILevelManager.Instance.ActivateLoseScreenUI();
+            }
         }
     }
 

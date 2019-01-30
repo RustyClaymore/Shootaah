@@ -20,6 +20,11 @@ public class EnemyGlobalState : State<EnemyEntity>
 
     public override void Execute(EnemyEntity enemy)
     {
+        if (SessionManager.Instance.CurrentPlayer.GetComponent<PlayerLife>().IsDead())
+        {
+            enemy.GetFSM().SetCurrentState(EnemyRoamState.Instance);
+        }
+
         if (enemy.EnemyMovementController.HasImpactedPlayer)
         {
             enemy.EnemyLifeController.TakeDamage(enemy.EnemyData.maxHealth);
